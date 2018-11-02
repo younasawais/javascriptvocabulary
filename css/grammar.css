@@ -1,0 +1,122 @@
+p, button, h5, h4, select, input{
+  /*font-family: Impact, Haettenschweiler, "Franklin Gothic Bold";*/
+  font-family: "Arial", Gadget, sans-serif;
+	font-size:large;
+}
+.container{
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+h5{
+  text-align: center;
+  display: inline;
+  margin-left: 15%;
+	font-weight: bolder;
+	color: #197952;
+}
+
+h4{
+  text-align: center;
+	font-weight: bolder;
+	color: #0b2822;
+  margin-left: auto;
+	font-size: 25px;
+}
+
+p{
+  color: #afe;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+}
+
+.debug{
+	text-align:left;
+	color:black;
+}
+.navi button:nth-child(1){
+  float:left;
+  width: 25%;
+	font-size: 12px;
+}
+
+.navi button:nth-child(3){
+  float:right;
+  width: 20%;
+	font-size: 12px;
+}
+
+.top1 p:nth-child(1){
+  float:left;
+  margin-left: 5px;
+}
+
+.top1 p:nth-child(2){
+  float:right;
+  margin-right: 5px;
+}
+
+#home div, #setup div, .bottom{
+  background-color: #217867;
+  margin-bottom: 2px;
+}
+
+.top11 p {
+    clear: both;
+}
+.inputAnswer{
+  color: #165044;
+  background-color: #cfa;
+  text-align: center;
+  width: 100%;
+  /*font-size: 30px;
+  letter-spacing: 2px;*/
+}
+
+.comment{
+	font-weight: bold;
+	color: #fff;`
+}
+
+.red{
+  color:red;
+}
+.green{
+  color:#77e358;
+}
+
+.darkGreen{
+	color: #06ff19;
+}
+
+.yellow, #debugValues{
+  color:yellow;
+}
+.bottom h4{
+	padding-top: 10px;
+}
+#setup input, select{
+  color: #165044;
+  background-color: #cfa;
+  text-align: center;
+  width: 100%;
+}
+
+button{
+  background-color: #0b2822;
+  color: #afe;
+  border: none;
+  width: 100%;
+ /* letter-spacing: 2px;
+  padding: 5px 10px 2px 5px;
+  font-size: 20px;*/
+}
+/******** Clearfix  ***********/
+.clearfix:before,
+.clearfix:after {
+	content:"";
+	display:table;}
+    
+.clearfix:after {
+	clear:both;}

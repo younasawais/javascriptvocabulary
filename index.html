@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Quiz</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+  <link rel="stylesheet" type="text/css" href="css/grammar.css">
+
+</head>
+<body>
+
+<div class="container col-sm-12 col-xs-12 col-md-7 col-lg-5">
+  
+  <div class="navi">
+    <button onclick="test()">Go Back</button>
+    <h5>GRAMMAR</h5>
+    <button>Reset</button>
+  </div></br>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#home">Main</a></li>
+    <li><a href="#setup">setup</a></li>
+  </ul>
+<!-- ***** Tabs start ***** -->
+  <div class="tab-content">
+    <!-- ***** Tab Home ***** -->
+    <div id="home" class="tab-pane fade in active">
+      <!-- ***** Top 1 ***** -->
+      <div class="top1 clearfix">
+        <p>Nr : <span class="yellow" id="nr">2 / 25</span></p>
+        <p>Status : <span class="yellow" id="status">Finished</span></p>
+      </div>
+      <!-- ***** Top 2 ***** -->
+      <div class="top2">
+        <p>Word : <span class="yellow" id="givenWord">xxx</span></p>
+      </div>
+      <!-- ***** Middle 1 ***** -->
+      <div class="middle1">
+        <input type="text" class="inputAnswer" placeholder="Translation"></br>
+        <button id="buttonSubmitWord" onclick="submitWordButton()">Submit Word</button></br>
+      </div>
+      <!-- ***** Middle 2 ***** -->
+      <div class="middle2">
+        <p class="comment" id="comment">Correct answer & comment </p>
+        <button id="buttonNext" onclick="startButton()">Start/Restart/Next</button></br>      
+        <p>Correct     : <span class="green" id="correct">x</span></p>
+        <p>Incorrect   : <span class="red" id="incorrect">x</span></p>
+        <p>Tries left   : <span class="yellow" id="triesLeft">x</span></p>
+      </div>
+			<button onclick="showHint()" id="btnShowHint">Show Hint</button>
+    </div>
+    <!-- ***** Tab setup ***** -->
+    <div id="setup" class="tab-pane fade">
+      <!-- ***** Top 1 ***** -->
+      <div class="top11">
+        <p id="totalWords">Total words : <span class="yellow">x</span></p>
+        <p id="afterFilter">After Filter : <span class="yellow">x</span></p>
+        <p id="libraryName">Library name : <span class="yellow">x</span></p>
+        <p id="randomActive">Random  : <span class="yellow">x</span></p>
+      </div>
+      <!-- ***** Middle 1 ***** -->
+      <div class="middle">
+      <p id="range">Range</p>
+      <input type="number" id="startRange" placeholder="start range"></br>
+      <input type="number" id="endRange" placeholder="end range"></br>
+
+<!--       <p>Category</p>
+      <select id="categorySelect" name="categorySelect"> <!--Supplement an id here instead of using 'text'-->
+  <!--       <option value="category1">Value 1</option> 
+        <option value="category2" selected>Value 2</option>
+        <option value="category3">Value 3</option>
+      </select> -->
+      <p>Random</p>
+      <select id="swift"> <!--Supplement an id here instead of using 'text'-->
+        <option value="yes">Yes</option> 
+        <option value="no" selected>No</option>
+      </select>
+<!--       <p>Mode</p>
+      <select id="mode" name="mode"> <!--Supplement an id here instead of using 'text'
+        <option value="word2trans">Word -> trans</option> 
+        <option value="trans2word" selected>Trans -> Word</option>
+        <option value="def2word" selected>Def -> Word</option>        
+      </select> -->
+
+      <button id="submitConfig" onclick="submitConfigButton()">Submit Configurations</button></br>
+      </div>
+    </div>
+  </div>
+      <div class="bottom">
+				<h4 >DEBUG</h4>
+				<button onclick="btnShowVars()" id="btnShowVars">SHOW VARIABLES</button>
+				<div id="debugConfiguration"></div>
+      </div>
+</div>
+<script>
+
+	function wordList(){
+	this.word = new Array("suffice","contribution","conduct","contingency","compel","privilege","constrain","instigate","provoke","despair","empathy","infiltration","unlike","recall","rectify","theocracy","stance","delicate","superstition","distorted","contention","scenario","prosperity","opponent","overwhelming","proponents","impeach","compartments","on behalf of","divisive","contrary","hence","setback","evidently","manifest","delegation","pessimism","counter measure","preoccupied","convenient","as such","austerity","feasible","flaws","legacy","contrast","approach","hypothetical","confront","sceptical","perhaps","despite","sufficient","ambiguous","accelerate","discourse","views","factions","animosity","shortsighted","insurgency","clear-cut","remarkable","moratorium","confession","comprise","provoke","inform","supersede","evaluate","candor");		
+	this.translation1 = new Array("voldoen","bijdrage","gedrag","onvoorziene","dwingen","gunst","beperken","aansporen","uitlokken","wanhoop","inleveringsvermogen","binnendringen","in tegenstelling","herinner","herstellen","","houding","gevoelig","bijgeloof","vervormd","strijd","","welvaart","tegenstander","(very great in amount.)","voorstanders","beschuldigen","vakjes","namens","verdeeldheid","tegendeel","dus","tegenslag","klaarblijkelijk","settle","staatsrepresenteurs","negatiefdenkend","tegenmaatregel","bezorgd","gemakkelijk","als zodanig","strengheid","uitvoerbaar/haalbaar","gebreken","erfenis","tegengesteld","aanpak","stel","tegengaan","twijfelend","misschien","ondanks","voldoende","dubbelzinnig","versnellen","preek/speech","denkwijze","partijen","vijandigheid","kortzichtig","opstand","duidelijk","opmerkelijk","verbode","bekentenis","omvatten/bevat","opwekken","melden","vervangen","schatten","openhartigheid");		
+	this.translation2 = new Array("volstaan","","houding","","","","","","","","","","","","","","","","","","bewering","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","");		
+	this.synonym = new Array("enough","donation","behaviour","eventuality","","advantage","","provoke","to anger","","","","","","","church-state","attitude","","","","","situation","","","overpowering","","","","","","","","","obviously/apparently","settle","","","","","","","","","","inheritance","","","","oppose","doubtful","maybe","notwithstanding","enough","obscure","speed up","conversation","","","","","","sharply defined","extraordinary","","acknowledgment","","","","replace","assess","directness");		
+	this.definition1 = new Array("be enough or adequate","a gift or payment to a common fund or collection","personal behavior; way of acting","a future event or circumstance that is possible but cannot be predicted with certainty","to force or drive, especially to a course of action","a special right, advantage, or immunity granted or available only to a particular person or group of people.","to force or drive, especially to a course of action","bring about or initiate (an action or event).","to incite or stimulate (a person, animal, etc.) to action. ","the complete loss or absence of hope.","the ability to understand and share the feelings of another.","to filter into or through; permeate. ","dissimilar or different from each other.","bring (a fact, event, or situation) back into one's mind, especially so as to recount it to others; remember.","put (something) right; correct.","religous ruling system","a mental or emotional position adopted with respect to something","very fine in texture or structure; of intricate workmanship or quality","excessively credulous belief in and reverence for supernatural beings.","pulled or twisted out of shape; contorted","a struggling together in opposition; strife. ","an imagined or projected sequence of events, especially any of several detailed plans or possibilities: ","a successful, flourishing, or thriving condition, especially in financial respects; good fortune. ","a person who is on an opposing side in a game, contest, controversy, or the like; adversary. ","so great as to render resistance or opposition useless","a person who puts forward a proposition or proposal. ","to accuse (a public official) before an appropriate tribunal of misconduct in office.","a part or space marked or partitioned off.","as a representative of or a proxy for","forming or expressing division or distribution. ","opposite in nature or character; diametrically or mutually opposed","as an inference from this fact; for this reason; therefore","a check to progress; a reverse or defeat","it is plain that; it would seem that.","to make clear or evident to the eye or the understanding; show plainly","the body of people chosen to represent a political unit, as a state, in an assembly","a lack of hope or confidence in the future.","","completely engrossed in thought; absorbed. ","suitable or agreeable to the needs or purpose; well-suited with respect to facility or ease in use; favorable, easy, or comfortable for use. ","","severity of manner, life, etc.; sternness.","capable of being done, effected, or accomplished","a feature that mars the perfection of something; defect; fault: ","anything handed down from the past, as from an ancestor or predecessor","to compare in order to show unlikeness or differences; note the opposite natures, purposes, etc., of: ","the method used or steps taken in setting about a task, problem","a suppose situation","to face in hostility or defiance","doubtful about a particular thing","","","adequate for the purpose ","of doubtful or uncertain nature; difficult to comprehend, distinguish, or classify: ","","communication of thought by words","a particular manner of looking at something","a group or clique within a larger group, party, government, organization, or the like","a feeling of strong dislike towards someone","lacking in foresight","rebellion within a group, as by members against leaders.","formed with or having clearly defined outlines","notably or conspicuously unusual ","a suspension of activity","a formal, usually written, acknowledgment of guilt by a person accused of a crime.","to include or contain, to consist of","to anger, enrage, exasperate, or vex","to give or impart knowledge of a fact or circumstance to","take the place of ,a person or thing previously in authority or use","form an idea of the amount, number, or value of; assess","the state or quality of being frank, open, and sincere in speech or expression; candidness");		
+	this.definition2 = new Array("","","the manner in which a person behaves, especially on a particular occasion or in a particular context.","dependence on chance or on the fulfillment of a condition; uncertainty; fortuitousness","o secure or bring about by force.","a grant to an individual, corporation, etc., of a special right or immunity, under certain conditions. ","severely restrict the scope, extent, or activity of.","to cause by incitement","to stir up, arouse, or call forth (feelings, desires, or activity)","someone or something that causes hopelessness","the imaginative ascribing to an object, as a natural object or work of art, feelings or attitudes present in oneself","to move into (an organization, country, territory, or the like) surreptitiously and gradually, especially with hostile intent","different, dissimilar, or unequal; not alike","","","a system of government in which priests rule in the name of God or a god","","","","","strife in debate; dispute; controversy. ","","","","","a person who argues in favor of something; an advocate. ","to call to account. ","a separate room, section, etc","in the interest or aid of (someone)","creating dissension or discord. ","","","","plainly or obviously; in a way that is clearly seen or understood.","","","","","","","","","","","","","","","","","","","","open to or having several possible meanings or interpretations; equivocal","","","","","","","","easy to perceive or understand","","an authorized period of delay or waiting. ","","","","","to replace in power, authority, effectiveness, acceptance, use, etc., as by another person or thing.","to determine or set the value or amount of; appraise","the quality of being open and honest in expression; frankness.");		
+	this.example = new Array("a quick look should suffice","charitable contributions","the conduct of the police during the riot","He was prepared for every contingency.","His disregard of the rules compels us to dismiss him.","education is a right, not a privilege","He was constrained to admit the offense.","they instigated a reign of terror","The mishap provoked a hearty laugh.","driven to despair , he throws himself under a train","Such a metaphor betrays a complete lack of understanding, of empathy with Victorian culture.","The troops infiltrated the enemy lines.","they seemed utterly unlike, despite being twins","I can still vaguely recall being taken to the hospital","mistakes made now cannot be rectified later","Iran has made the transition in the last twenty years from a nominal constitutional monarchy to a democratic theocracy","They assumed an increasingly hostile stance in their foreign policy.","a spider's web, strong yet delicate","he dismissed the ghost stories as mere superstition","his report gives a distorted view of the meeting","So even back then, this was an obvious point of concern and contention. ","","Prior to that, he spent years as a vice president at the influential conservative non-profit Americans for prosperity. ","As the campaign season heated up, his opponent hammered away on the issue. ","The temptation to despair may become overwhelming.","The government of Borno State has been a proponent of the Civilian JTF. ","Every call, all over the country, men and women, all said the same thing: impeach him","the compartments of the human mind.","I would like to show this example on behalf of my friend","Johnson knew that the proposals he was going to send to the Hill would be divisive.","he ignored contrary advice and agreed on the deal","The eggs were very fresh and hence satisfactory","The new law was a setback.","He evidently believes that control of the 777 was taken over by somebody who gained access to the cockpit. ","the system's manifest failings","Our club sent a delegation to the rally.","His pessimism about the future of our country depresses me.","","his mother was preoccupied with paying the bills","","","","a feasible plan.","flaws in the law","Unfortunately, this is more about protecting the legacy of a great man.","Contrast the political rights of Romans and Greeks.","His approach to any problem was to prepare an outline","The Secretary of Defense refused to discuss hypotheticals with the reporters.","The feuding factions confronted one another.","My teacher thinks I can get a scholarship, but I'm skeptical.","","","sufficient proof; sufficient protection.","an ambiguous answer.","","","From a practical view, the situation presents several problems.","a faction in favor of big business","he no longer felt any animosity toward hem","a shortsighted plan","Rather, the revolution was brought there by certain elements of the insurgency.","","a remarkable change.","a moratorium on the testing of nuclear weapons.","a confession of incompetence.","","What could have provoked such an incident?","He informed them of his arrival.","the older models have now been superseded","to evaluate property","a man of refreshing candor");		
+	this.example2 = new Array("","","","a detailed contract that attempts to provide for all possible contingencies","Which brings us to the images that compel our attention today. ","the privileges of the very rich.","Cold weather constrained the plant's growth.","Republicans will continue to avoid a grand bargain and instigate crises. ","What could have provoked such an incident?","He is the despair of his mother.","By means of empathy, a great painting becomes a mirror of the self.","The intelligence agency infiltrated three spies into the neighboring country.","They contributed unlike sums to charity.","","","","My stance at this point is that the audience can decide for themselves. ","","","Then he took a few steps in her direction, his face distorted with rage","But that was so yesterday, much like his contention that he lacked the power to unilaterally confer amnesty.","","So enter billionaires two and three: Charles and David Koch and their Americans for prosperity group. ","","An overwhelming amount of subtleties and implications were going over my head. ","","Within the House Judiciary Committee, six Republicans voted with 21 Democrats to impeach the president. ","The EFPs were hidden in a compartment under an unassuming-looking house. ","","The Democrats were able to sideline Kucinich and avoid a divisive impeachment battle. ","","Sun is hot, hence it will warm up the earth","a serious setback for the peace process","evidently Mrs. Smith thought differently","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","They superseded the old statute with a new one","when you evaluate any hammer, look for precision machining","to consider an issue with candor");		
+	this.category = new Array("","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","");		
+	this.type = new Array("verb","noun","noun","noun","verb","noun","verb","verb","","noun","noun","noun","noun","verb","verb","noun","noun","noun","noun","verb","noun","noun","noun","noun","noun","noun","verb","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","verb","noun","noun","noun","noun","noun","noun","noun","noun","noun","noun","verb","verb","verb","verb","verb","noun");		}
+/* TODO : 
+  - after next, example & correct still shows 
+  - after next, the first word still shows and not next one
+*/
+document.onload = initialize();
+var fullWordList; 
+var filteredList;
+var config;
+var showHide;
+
+function initialize(){
+  fullWordList    = new wordList(); 
+  filteredList    = new wordList();
+  config          = new configuration();
+  config.status   = "default";
+  showHide        = new showHideContent();
+  showHide.checkStatus();
+}
+
+/************** Button Start / Next  **********/
+function startButton(){
+  if(config.status == "default"){              // After default
+    config.status         = "start";
+    config.incorrect      = 0;
+    config.correct        = 0;
+
+		if(filteredList.translation2[config.nr] !== ""){ //check if trans 2 available
+			config.givenWord      = 
+								filteredList.translation1[config.nr] + "  OR  " + 
+								filteredList.translation2[config.nr]; 
+		}else{
+			config.givenWord      = 
+								filteredList.translation1[config.nr];
+		}
+		if(filteredList.synonym[config.nr] !== ""){   // add synonym to given word
+			config.givenWord		 += ' (synonym : ' + filteredList.synonym[config.nr] + ' )';
+		}
+		
+    config.comment        = 'Defenition : <span class="yellow">'  + filteredList.definition1[config.nr] + "</span>";
+		if(filteredList.definition2[config.nr]!==""){     		 //if Definition 2 available, add to comment
+			config.comment						 += '</span> <br> Definition 2: <span class="yellow">' +
+                                    filteredList.definition2[config.nr];
+		}
+		config.comment			 += exampleHiddenWord();
+    config.currentWord    = filteredList.word[config.nr];
+    showHide.getInput().focus();
+    showHide.getInput().select();
+  } else if(config.status == "confirm"){       // After Confirm
+    config.status         = "afterNext";
+    config.nr++;
+    config.currentWord    = filteredList.word[config.nr];
+		if(filteredList.translation2[config.nr] !== ""){
+			config.givenWord    = 
+								filteredList.translation1[config.nr] + "  OR  " + 
+								filteredList.translation2[config.nr];
+		}else{
+			config.givenWord    = 
+								filteredList.translation1[config.nr];
+		}
+		if(filteredList.synonym[config.nr] !== ""){   // add synonym to given word
+			config.givenWord	 += ' (synonym : ' + filteredList.synonym[config.nr] + ' )';
+		}
+    config.comment        = 'Defenition : <span class="yellow">'  + filteredList.definition1[config.nr];
+		if(filteredList.definition2[config.nr]!==""){     		 //if Definition 2 available, add to comment
+			config.comment		 += '</span> <br> Definition 2: <span class="yellow">' +
+                                    filteredList.definition2[config.nr];
+		}
+		config.comment			 += exampleHiddenWord();
+			/*'</span> <br> Example: <span class="yellow">' + filteredList.example[config.nr];  add this*/
+    config.triesLeft      = 3;
+    
+  } else if(config.status == "finished"){      // After finished
+    config.status         = "default";
+    config.nr             = 0;
+    config.triesLeft      = 3;
+    config.givenWord      = "";
+    config.comment        = "Set configuration & press start.";
+    config.currentWord    = ""; 
+  }
+
+showHide.checkStatus();
+}
+
+/************** Submit Button  **********/
+function submitWordButton(){
+  var finished = false;
+  showHide.getInput().value       = showHide.getInput().value.toLowerCase();  //input to lowercase
+  config.currentWord              = config.currentWord.toLowerCase();
+  
+  if( config.currentWord == showHide.getInput().value ){ // Right answer
+    config.correct++;
+    
+    if( filteredList.word.length == ( config.nr + 1 )){
+      config.status               = "finished";
+    }else{
+      config.status               = "confirm";
+    }
+    config.hintValue              = "";
+    config.hints                  = 0;
+    config.comment                = 'Correct! <br>Example: <span class="yellow"> ' +
+                                    filteredList.example[config.nr];
+		if(filteredList.example2[config.nr]!==""){     		 //if example 2 available, add to comment
+			config.comment						 += '</span> <br> Example 2: <span class="yellow">' +
+                                    filteredList.example2[config.nr];
+		}
+    if( filteredList.word.length == ( config.nr + 1 )){  //If last word = finished
+      config.status               = "default";
+      config.triesLeft            = 3;
+      config.hintValue            = "";
+      config.hints                = 0;
+      config.comment             += '<p>Correct = <span class="green">' + config.correct + '</span></p>'+
+                                    '<p>Incorrect = <span class="red">' + config.incorrect + '</span></p>' + 
+                                    '<p class="darkGreen">Please press Start or set configurations</p>';    
+      finished                    = true;}
+  }else if(config.triesLeft === 1){                     // Wrong answer & next try
+    config.incorrect++;
+    config.triesLeft--;
+    config.hintValue              = "";
+    config.hints                  = 0;
+    config.comment                = 'Correct answer is : <span class="yellow">' + config.currentWord + 
+                                    '</span> <br> Example: <span class="yellow">' +
+                                    filteredList.example[config.nr];
+		if(filteredList.example2[config.nr]!==""){     		 //if example 2 available, add to comment
+			config.comment						 += '</span> <br> Example 2: <span class="yellow">' +
+                                    filteredList.example2[config.nr];
+		}
+    if( filteredList.word.length == ( config.nr + 1 )){  //If last word = finished
+      config.status               = "default";
+      config.triesLeft            = 3;
+      config.hintValue            = "";
+      config.hints                = 0;
+      config.comment             += '<p>Correct = <span class="green">' + config.correct + '</span></p>'+
+                                    '<p>Incorrect = <span class="red">' + config.incorrect + '</span></p>' + 
+                                    '<p class="darkGreen">Please press Start or set configurations</p>';    
+      finished                    = true;
+      
+    }else{
+      config.status               = "confirm";
+    }
+    
+  }else{                                                 // Wrong answer & No tries left
+    config.triesLeft--;
+    config.wrongAnswer            = true;
+    config.comment                = "Incorrect! You have " + config.triesLeft + " left!";
+    config.hintValue              = "";
+    config.hints                  = 0;
+  }
+  showHide.checkStatus();
+  if(finished){
+    config.nr                     = 0;
+  }
+}
+
+/************** Return example hidden words *******/
+function exampleHiddenWord(){
+	var returnVal;
+	var newExample1;
+	var newExample2;
+	newExample1 = filteredList.example[config.nr].replace(filteredList.word[config.nr]," ...("+filteredList.type[config.nr]+")"); 
+	returnVal = '</span> <br> Example: <span class="yellow">' + newExample1 ;
+	if( filteredList.example2[config.nr] !== "" ){ 														 // if second example available
+		newExample2 = filteredList.example2[config.nr].replace(filteredList.word[config.nr]," ...("+filteredList.type[config.nr]+")"); 
+		returnVal  += '</span> <br> Example 2: <span class="yellow">' + newExample2;
+	}
+	return returnVal;
+}
+
+/************** Button Show Hint  **********/
+function showHint(){
+  if( config.hints < config.currentWord.length ){
+    config.hints++;
+    config.hintValue       =  '<br>Hints :<span class="green"> ' +
+                    config.currentWord.substring( 0, config.hints ) + "</span>";
+   }else{
+    config.hintValue       =  '<br>Hints :<span class="green"> ' + config.currentWord.substring( 0, config.hints ) + 
+                              "</span><br>Max Hints Shown";
+   }
+  showHide.checkStatus();
+} 
+
+/************** Button Submit Config  **********/
+function submitConfigButton(){
+  updateFilteredList();
+  showHide.checkStatus();
+} 
+
+
+
+
+/************** Filter All  **********/
+function updateFilteredList(){
+	filteredList    			= new wordList();
+	if(showHide.getStartRange().value !== "" || showHide.getEndRange().value !== ""){
+		  config.startRange     = Number(showHide.getStartRange().value) -1;
+  		config.endRange       = Number(showHide.getEndRange().value);
+		  var rangeLength = config.endRange - config.startRange;
+  /*** Filter out range ***/
+  for(var r = 0 ; r < rangeLength; r++){
+    filteredList.word[r]          = fullWordList.word[config.startRange + r];
+    filteredList.translation1[r]  = fullWordList.translation1[config.startRange + r];
+    filteredList.translation2[r]  = fullWordList.translation2[config.startRange + r];
+    filteredList.synonym[r]       = fullWordList.synonym[config.startRange + r];
+    filteredList.definition1[r]   = fullWordList.definition1[config.startRange + r];
+    filteredList.definition2[r]   = fullWordList.definition2[config.startRange + r];
+    filteredList.example[r]       = fullWordList.example[config.startRange + r];
+    filteredList.example2[r]      = fullWordList.example2[config.startRange + r];
+    filteredList.category[r]      = fullWordList.category[config.startRange + r];
+    filteredList.type[r]          = fullWordList.type[config.startRange + r];
+  }
+  /*** Delete last indexes ***/
+  for(var s = 0 ; s < (fullWordList.word.length - rangeLength) ; s++){
+    filteredList.word.pop();
+    filteredList.translation1.pop();
+    filteredList.translation2.pop();
+    filteredList.synonym.pop();
+    filteredList.definition1.pop();
+    filteredList.definition2.pop();
+    filteredList.example.pop();
+    filteredList.example2.pop();
+    filteredList.category.pop();
+    filteredList.type.pop();
+  }  
+}
+
+/*** If swift is "yes" ***/
+config.swiftVal       = showHide.getSwiftVal();
+if(config.swiftVal === "Yes"){
+	var numbersMixed 		= randomOrder(filteredList.word.length - 1);
+	var tempList 				= new wordListFiltered();
+
+	for(var i = 0 ; i < filteredList.word.length ; i++){
+		tempList.word[i] 					= filteredList.word[numbersMixed[i]];
+		tempList.translation1[i] 	= filteredList.translation1[numbersMixed[i]];
+		tempList.translation2[i] 	= filteredList.translation2[numbersMixed[i]];
+		tempList.synonym[i] 			= filteredList.synonym[numbersMixed[i]];
+		tempList.definition1[i] 	= filteredList.definition1[numbersMixed[i]];
+		tempList.definition2[i] 	= filteredList.definition2[numbersMixed[i]];
+		tempList.example[i] 			= filteredList.example[numbersMixed[i]];
+		tempList.example2[i] 			= filteredList.example2[numbersMixed[i]];
+		tempList.category[i] 			= filteredList.category[numbersMixed[i]];
+		tempList.type[i] 					= filteredList.type[numbersMixed[i]];
+	}
+
+	for(i = 0 ; i < filteredList.word.length ; i++){
+		filteredList.word[i]          = tempList.word[i];
+		filteredList.translation1[i]  = tempList.translation1[i];
+		filteredList.translation2[i]  = tempList.translation2[i];
+		filteredList.synonym[i]       = tempList.synonym[i];
+		filteredList.definition1[i]   = tempList.definition1[i];
+		filteredList.definition2[i]   = tempList.definition2[i];
+		filteredList.example[i]       = tempList.example[i];
+		filteredList.example2[i]      = tempList.example2[i];
+		filteredList.category[i]      = tempList.category[i];
+		filteredList.type[i]          = tempList.type[i];
+	}
+ }  
+}
+
+
+/********** random order *************/
+function randomOrder(lengthArray){
+	var n = lengthArray + 1; //filteredList.word.length;
+	var a = new Array("");
+	for(var l = 0; l < n ; l++){
+		a[l] = l;
+	}
+  
+  for(var p = n - 1; p > 0; p--) {
+      var j = Math.floor(Math.random() * (p + 1));
+      var tmp = a[p];
+      a[p] = a[j];
+      a[j] = tmp;
+  }
+  return a;
+}
+
+/************** Show Hide Debug Div **********/
+function btnShowVars(){
+  if(config.debugDiv == "hide"){
+    config.debugDiv = "show";
+  }else if(config.debugDiv == "show"){
+    config.debugDiv = "hide";
+  }
+  showHide.checkStatus();
+}
+
+/**************** Debug ******************/
+function debugVal(){
+  var debugConfiguration    = document.getElementById("debugConfiguration");
+  debugConfiguration.innerHTML = 
+    '<p>Nr : <span id="debugValues">' + config.nr + "</span></p>" + 
+    '<p>Current Word : <span id="debugValues">' + config.currentWord + "</span></p>" + 
+    '<p>input Answer : <span id="debugValues">' + showHide.getInput().value + "</span></p>" + 
+    '<p>Given Word : <span id="debugValues">' + config.givenWord + "</span></p>" + 
+    '<p>Wrong Answer : <span id="debugValues">' + config.wrongAnswer + "</span></p>" + 
+    '<p>Status : <span id="debugValues">' + config.status + "</span></p>" + 
+    '<p>Library Name : <span id="debugValues">' + config.libraryName + "</span></p>" + 
+    '<p>Tries Left : <span id="debugValues">' + config.triesLeft + "</span></p>" + 
+    '<p>Category Selected : <span id="debugValues">' + config.categorySelected + "</span></p>" + 
+    '<p>Start Range : <span id="debugValues">' + config.startRange + "</span></p>" + 
+    '<p>End Range : <span id="debugValues">' + config.endRange + "</span></p>" + 
+    '<p>Mode : <span id="debugValues">' + config.mode + "</span></p>" + 
+    '<p>Correct : <span id="debugValues">' + config.correct + "</span></p>" + 
+    '<p>Incorrect : <span id="debugValues">' + config.incorrect +  "</span></p>" +
+    '<p>Debug div : <span id="debugValues">' + config.debugDiv +  "</span></p>" +
+    '<p>Hints : <span id="debugValues">' + config.hints +  "</span></p>" +
+    '<p>Random : <span id="debugValues">' + config.swiftVal +  "</span></p>" +
+    '<p>Filtered List length : <span id="debugValues">' + filteredList.word.length + "</span></p>";
+}
+
+/****** Enter Key ******/
+document.getElementsByTagName("body")[0].addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    if( config.status == "start" || config.status == "afterNext"){
+      document.getElementById("buttonSubmitWord").click();              // Submit Button
+    }else if(config.status == "default" || config.status == "confirm" || config.status == "finished"){
+      document.getElementById("buttonNext").click();                    // Start/Next button
+    }
+  }
+}); 
+
+/************** Show / Hide tabs *************/
+$(document).ready(function(){
+    $(".nav-tabs a").click(function(){
+        $(this).tab('show');
+    });
+});
+
+function configuration(){
+  this.nr               = 0;
+  this.currentWord;
+  this.givenWord;
+  this.wrongAnswer      = false;
+  this.comment          = "Press Start!";
+  this.status; // default, after start, after confirm & no tries, after finished
+  this.libraryName      = "NL-EN";
+  this.triesLeft        = 3;
+  this.categorySelected;
+  this.startRange       = 1;
+  this.endRange         = filteredList.word.length;
+  this.swift            = "no";
+  this.mode             = "wordTrans";
+  this.correct          = 0;
+  this.incorrect        = 0;
+  this.hints            = 0;
+  this.hintValue        = "";
+  this.debugDiv         = "hide";
+  this.swiftVal         = "no"; //showHide.swiftVal;
+}
+
+function wordListFiltered(){
+  this.word             = new Array("");
+  this.translation1     = new Array("");
+  this.translation2     = new Array("");
+  this.synonym          = new Array("");
+  this.definition1      = new Array("");
+  this.definition2      = new Array("");
+  this.example          = new Array("");
+  this.example2         = new Array("");
+  this.category         = new Array("");
+  this.type             = new Array("");
+}
+
+function showHideContent(){
+  var buttonNext        = document.getElementById("buttonNext");
+  var buttonSubmitWord  = document.getElementById("buttonSubmitWord");
+  var btnShowHint       = document.getElementById("btnShowHint");
+  var inputAnswer       = document.getElementsByClassName("inputAnswer")[0];
+  var comment           = document.getElementById("comment");
+  var nr                = document.getElementById("nr");
+  var givenWord         = document.getElementById("givenWord");
+  var status            = document.getElementById("status");
+  var correct           = document.getElementById("correct");
+  var incorrect         = document.getElementById("incorrect");
+  var startRange        = document.getElementById("startRange");
+  var endRange          = document.getElementById("endRange");
+  var triesLeft         = document.getElementById("triesLeft");
+  var totalWords        = document.getElementById("totalWords");
+  var afterFilter       = document.getElementById("afterFilter");
+  var libraryName       = document.getElementById("libraryName");
+  var categorySelect    = document.getElementById("categorySelect");
+  var mode              = document.getElementById("mode");
+  var submitConfig      = document.getElementById("submitConfig");
+  var debugConfig       = document.getElementById("debugConfiguration");
+  var swift             = document.getElementById("swift");
+  var randomActive      = document.getElementById("randomActive");
+  var swiftVal          = swift.options[swift.selectedIndex].text;
+  /*/*Ignore this*/
+
+  this.getInput = function(){
+    return inputAnswer;
+  }
+
+  this.getButtonSubmit = function(){
+    return buttonSubmitWord;
+  }
+
+  this.getStartRange = function(){
+    return startRange;
+  }
+
+  this.getEndRange = function(){
+    return endRange;
+  }
+
+  this.getSwiftVal = function(){
+    swiftVal = swift.options[swift.selectedIndex].text;
+    return swiftVal;
+  }
+  
+ this.checkStatus = function(){
+    switch (config.status) {
+      case "default":
+        /** HIDE **/
+        givenWord.style.display           = "none";
+        buttonSubmitWord.style.display    = "none";
+        btnShowHint.style.display         = "none";
+        triesLeft.style.display           = "none";
+        correct.style.display             = "none";
+        incorrect.style.display           = "none";
+        /** SHOW **/
+        buttonNext.style.display          = "inline";
+        submitConfig.style.display        = "inline";
+
+        /** Value Next Button **/
+        buttonNext.innerHTML              = "START";
+        //comment.innerHTML = "Press Start";
+
+          break;
+      case "start":
+        /** HIDE **/
+        buttonNext.style.display          = "none";
+        submitConfig.style.display        = "none";
+        /** SHOW **/
+        buttonSubmitWord.style.display    = "inline";
+        givenWord.style.display           = "inline";
+        btnShowHint.style.display         = "inline";
+        triesLeft.style.display           = "inline";
+        correct.style.display             = "inline";
+        incorrect.style.display           = "inline";
+
+        /** Value Next Button **/
+        buttonNext.innerHTML              = "(hidden)";
+ 
+          break;
+      case "confirm":
+        /** HIDE **/
+        buttonSubmitWord.style.display    = "none";
+        btnShowHint.style.display         = "none";
+        submitConfig.style.display        = "none";
+
+        /** SHOW **/
+        givenWord.style.display           = "inline";
+        buttonNext.style.display          = "inline";
+        triesLeft.style.display           = "inline";
+        correct.style.display             = "inline";
+        incorrect.style.display           = "inline";
+
+        /** Value Next Button **/
+        buttonNext.innerHTML              = "NEXT";
+
+          break;
+      case "afterNext":
+        /** HIDE **/
+        buttonNext.style.display          = "none";
+        submitConfig.style.display        = "none";
+        btnShowHint.style.display         = "inline";
+
+        /** SHOW **/
+        givenWord.style.display           = "inline";
+        buttonSubmitWord.style.display    = "inline";
+        triesLeft.style.display           = "inline";
+        correct.style.display             = "inline";
+        incorrect.style.display           = "inline";
+
+        /** Value Next Button **/
+        buttonNext.innerHTML              = "(hidden)";
+
+          break;
+      case "finished":
+        /** HIDE **/
+        givenWord.style.display           = "none";
+        buttonSubmitWord.style.display    = "none";
+        triesLeft.style.display           = "none";
+        correct.style.display             = "none";
+        incorrect.style.display           = "none";
+        btnShowHint.style.display         = "none";
+
+        /** SHOW **/
+        buttonNext.style.display          = "inline";
+        submitConfig.style.display        = "inline";
+
+        /** Value Next Button **/
+        buttonNext.innerHTML              = "RESTART";
+      }
+      
+/********  Update All values ********/
+   nr.innerHTML               = (config.nr + 1) +" / "+filteredList.word.length;
+   status.innerHTML           = config.status;
+   correct.innerHTML          = config.correct;
+   incorrect.innerHTML        = config.incorrect;
+   triesLeft.innerHTML        = config.triesLeft;
+   totalWords.innerHTML       = 'Total word : <span class="yellow">'+ fullWordList.word.length+"</span>";
+   afterFilter.innerHTML      = 'After filter : <span class="yellow">'+ filteredList.word.length+"</span>";
+   libraryName.innerHTML      = 'Library : <span class="yellow">' + config.libraryName+"</span>";
+   givenWord.innerHTML        = config.givenWord;
+   inputAnswer.value          = "";
+   comment.innerHTML          = config.comment + config.hintValue;
+   randomActive.innerHTML     = 'Random  : <span class="yellow">' + config.swiftVal +'</span>';
+  
+   /**** Show Hide Debug Div ****/
+   if(config.debugDiv == "hide"){
+     debugConfig.style.display = "none";
+   }else if(config.debugDiv == "show"){
+     debugConfig.style.display = "inline";
+   }
+   debugVal();  // Show variables after every button press
+  } 
+
+//Ignore this/**/
+}	
+</script>
+</body>
+<!-------------------------------------------------------->
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setCookieDomain", "*.localforces.com"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//inkview.com/piwik/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '4']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//inkview.com/piwik/piwik.php?idsite=4&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Matomo Code -->
+</html>

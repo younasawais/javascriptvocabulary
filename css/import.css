@@ -1,0 +1,217 @@
+*{
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  font-family: Impact, Haettenschweiler, "Franklin Gothic Bold";}
+
+.greyOutSide{
+  width: 980px;
+  min-height: 700px;
+  background-color: #87deaa;
+  margin-left: auto;
+  margin-right: auto;  }
+
+.greyOutSide * {
+  margin-left: auto;
+  margin-right: auto; }
+
+/***** DASHBOARD *****/
+.dashboard{
+  text-align: center;
+  font-size: 60px;
+  width: 870px;
+  letter-spacing: 10px;
+  color: #c8c4b7;
+  min-height: 88px;
+  background-color: #165044; }
+
+/******* SECOND  *****/
+.second{
+  margin-top: 1px;
+  width: 870px;
+  min-height: 565px;
+  background-color: #165044; }
+
+.second-left{
+  float: left;
+  margin-top: 1px;
+  width: 400px;
+  min-height: 565px;
+  background-color: #217867; }
+ 
+.second-left p{
+	color: #e3dedb;
+	font-size: 25px;
+	margin: 10px 10px 10px 10px;}
+
+.second-left form{
+	margin: 10px;}
+
+.dropdown{
+	width: 380px;
+	height: 40px;
+	text-align: center;
+	font-size: 20px;
+	background-color: #cfa;
+}
+.upload{
+	height: 40px;
+	text-align: left;
+	width: 380px;
+	font-size: 20px;
+	background-color: #cfa;
+}
+ .downloadXLS{
+  margin: 70px 0 10px 10px;
+  width: 360px;
+  min-height:55px;
+  padding: 10px 10px 10px 10px;
+  background-color: #165044; }
+  
+.downloadXLS p:nth-child(1){
+	color: #2ca02c;
+	letter-spacing: 1px;}
+
+.downloadXLS p:nth-child(2){
+	color: #99ff55;
+	letter-spacing: 1px;}
+
+ .second-right{
+  float: right;
+  margin-top: 1px;
+  width: 469px;
+  min-height: 565px;
+  background-color: #165044;
+ }
+.submitUpload, .submitDropdown{
+	border: medium none;
+	width: 380px;
+	height: 40px;
+	color: rgb(255, 170, 170);
+	font-size: 20px;
+	background-color: #2b0000;
+	margin-top: 5px;
+}
+.second-right-first{
+  width: 469px;
+  min-height: 50px;
+  background-color: #217867;
+ }
+ 
+.second-right-first p {
+	text-align: center;
+	font-size: 40px;
+	color: rgb(227, 222, 219);
+	letter-spacing: 3px;
+}
+.second-right-second{
+  margin-top: 2px;
+  width: 469px;
+  min-height: 513px;
+  background-color: #165044;
+ }
+ 
+.second-right-second-left{
+	float:left;
+	background-color: #217867;
+	height: 513px;
+	width: 240px;
+	overflow: scroll;
+	font-family: serif;
+ }
+.second-right-second-left p{
+	font-size: 17px;
+	color: #e5ff80;
+	margin: 0px 0px 0px 10px;
+}
+.second-right-second-left p:nth-child(1){
+	text-align: center;
+	font-size: 20px;
+	color: rgb(188, 243, 233);
+	margin: 10px 0px 0px 10px;
+}
+.second-right-second-left p span{
+	color: #e5ff80;
+}
+.second-right-second-right{
+	float:right;
+	min-height: 513px;
+	background-color: #217867;
+	width: 227px;
+ }
+ 
+.second-right-second-right p{
+	color: #ffb380;
+	margin: 5px 0 0 5px;
+	font-family: serif;
+}
+
+.second-right-second-right p:nth-child(1){
+	color: #720000;
+	margin: 5px 0 0 5px;
+}
+
+.submit{
+  background-color: #0b2822;
+  color : #aaffee;
+  border: none;
+  padding: 0 40px 0 40px;
+  margin-left: 20px;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+/******** THIRD *****/
+.third{
+  margin-top: 1px;
+  width: 870px;
+  background-color: #165044; }
+
+.third-one-left{
+  float: left;
+}
+.third-one-right{
+  float: right;
+  height: 260px;
+  width: 500px;
+  background-color: #217867;
+}
+
+.third-one{
+}
+
+.exit{
+  width: 100px;
+  height: 40px;
+  color: #ffaaaa;
+  font-size: 20px;
+  background-color: #2b0000;
+  float: left;
+  border: none;
+}
+
+.restart{
+  width: 100px;
+  height: 40px;
+  float:  right;
+  color: #ffaaaa;
+  font-size: 20px;
+  background-color: #2b0000;
+  border: none;
+}
+/******** Clearfix  ***********/
+.clearfix:before,
+.clearfix:after {
+	content:"";
+	display:table;}
+    
+.clearfix:after {
+	clear:both;}
+/******* End CSS *******/
+/** Sample **/
+/*
+.blabla{
+  color : green;
+  margin-top: 5px;
+  margin-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 10px;}
+*/
